@@ -7,8 +7,10 @@ let tasks = [];
 
 if (localStorage.getItem(`tasks`)) {
   tasks = JSON.parse(localStorage.getItem(`tasks`))
-  tasks.forEach((task) => renderTask(task))
+  
 }
+
+tasks.forEach((task) => renderTask(task))
 
 checkEmptyList();
 
@@ -28,13 +30,13 @@ function addTask (e) {
   // Gettings text from input
   const taskValue = taskInput.value;
 
-  const newTask = {
+  const task = {
     id: Date.now(),
     text: taskValue,
     done: false
   }
 
-  tasks.push(newTask);
+  tasks.push(task);
   SaveToLocalStorage()
 
   renderTask(task)
@@ -98,10 +100,10 @@ function SaveToLocalStorage() {
 }
 
 function renderTask(task) {
-  const cssClass = newTask.done ? "task-title task-title--done" : "task-title";
+  const cssClass = task.done ? "task-title task-title--done" : "task-title";
   
-  const taskHTML = `<li id="${newTask.id}" class="list-group-item d-flex justify-content-between task-item">
-                      <span class=${cssClass}>${newTask.text}</span>
+  const taskHTML = `<li id="${task.id}" class="list-group-item d-flex justify-content-between task-item">
+                      <span class="${cssClass}">${task.text}</span>
                       <div class="task-item__buttons">
                         <button type="button" data-action="done" class="btn-action">
                           <img src="./img/tick.svg" alt="Done" width="18" height="18">
